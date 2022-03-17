@@ -11,20 +11,32 @@ module.exports = {
       roleId: {
         type: Sequelize.STRING
       },
+      positionId: {
+        type: Sequelize.STRING
+      },
+      email: {
+        type: Sequelize.STRING
+      },
+      password: {
+        type: Sequelize.STRING
+      },
       firstName: {
         type: Sequelize.STRING
       },
       lastName: {
         type: Sequelize.STRING
       },
-      email: {
+      phoneNumber: {
         type: Sequelize.STRING
       },
-      address: {
+      image: {
         type: Sequelize.STRING
       },
       gender: {
         type: Sequelize.BOOLEAN
+      },
+      address: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

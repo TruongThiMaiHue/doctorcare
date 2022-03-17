@@ -1,18 +1,18 @@
 'use strict';
 const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class Speciality extends Model {
+    class History extends Model {
             static associate(models) {
         }
     }
-    Speciality.init({
+    History.init({
+        patientId: DataTypes.INTEGER,
+        doctorId: DataTypes.INTEGER,
         description: DataTypes.TEXT,
-        image: DataTypes.STRING,
-        name: DataTypes.STRING,
-
+        files: DataTypes.TEXT,
     }, {
         sequelize,
-        modelName: 'Speciality',
+        modelName: 'History',
     });
-    return Speciality;
+    return History;
 };
