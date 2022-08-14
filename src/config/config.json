@@ -1,23 +1,31 @@
 {
-  "development": {
-    "username": "root",
-    "password": null,
-    "database": "bôking",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  },
-  "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
-  }
+    "development": {
+        "username": "doctor",
+    "password": "doctor",
+    "database": "doctor",
+    "host": "localhost",
+    "dialect": "mysql",
+    "logging": false,
+    "operatorsAliases": 0,
+    "dialectOptions": {
+        "dateStrings": true,
+        "typeCast": true,
+        "timezone": "+07:00"
+    },
+        "timezone": "+07:00"
+    },
+    "test": {
+        "dialect": "mysql",
+        "operatorsAliases": 0
+    },
+    "production": {
+        "dialect": "mysql",
+        "operatorsAliases": 0,
+        "dialectOptions": {
+            "dateStrings": true,
+            "typeCast": true,
+            "timezone": "+07:00"
+        },
+        "timezone": "+07:00"
+    }
 }
