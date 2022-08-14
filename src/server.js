@@ -1,19 +1,38 @@
-import express from 'express'
-import viewEngine from './config/viewEngine'
-import initWebRoutes from './routes/web'
-import connectDB from './config/connectDB'
-require('dotenv').config()
+require('dotenv').config();
+import express from "express";
+import configViewEngine from "./config/viewEngine";
+import initRoutes from "./routes/web";
+import bodyParser from "body-parser";
+import cookieParser from 'cookie-parser';
+import flash from 'connect-flash';
+import methodOverride from 'method-override';
+import passPort from "passport";
+import session from "./config/session";
 
-let app = express()
 
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
+let app = express();
+app.use(methodOverride('_method'));
+app.use(cookieParser('secret'));
 
-viewEngine(app)
-initWebRoutes(app)
-connectDB()
+app.use(flash());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
-let port = process.env.PORT
-app.listen(port, () => {
-    console.log('server is running')
-})
+//config session
+session.configSession(app);
+
+configViewEngine(app);
+
+// config Passportjs
+app.use(passPort.initialize());
+app.use(passPort.session());
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
+initRoutes(app);
+
+let port = process.env.PORT;
+app.listen(port || 8080, () => console.log(`Doctors care app is running on port ${port}!`));

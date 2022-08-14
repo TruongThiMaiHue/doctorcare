@@ -1,0 +1,26 @@
+services:
+  server:
+    working_dir: /app
+    container_name: doctorcare_server
+    build: ./
+    restart: always
+    ports:
+      - 3001:3001
+    volumes:
+      - ./src:/app/src
+      - /app/node_modules
+  mysql:
+    image: mysql:5.7
+    container_name: doctorcare_mysql
+    ports:
+      - 3306:3306
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: doctor
+      MYSQL_DATABASE: doctor
+      MYSQL_USER: doctor
+      MYSQL_PASSWORD: doctor
+    volumes:
+      - mysql:/var/lib/mysql
+volumes:
+  mysql: 

@@ -1,24 +1,28 @@
 'use strict';
-const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-    class User extends Model {
-        static associate(models) {
-      }
-    }
-    User.init({
-        password: DataTypes.STRING,
-        firstName: DataTypes.STRING,
-        lastName: DataTypes.STRING,
+    const User = sequelize.define('User', {
+        name: DataTypes.STRING,
         email: DataTypes.STRING,
+        password: DataTypes.STRING,
         address: DataTypes.STRING,
-        gender: DataTypes.BOOLEAN,
-        image: DataTypes.STRING,
-        phoneNumber: DataTypes.STRING,
-        roleId: DataTypes.STRING,
-        positionId: DataTypes.STRING,
-    }, {
-      sequelize,
-      modelName: 'User',
-    });
+        phone: DataTypes.STRING,
+        avatar: DataTypes.STRING,
+        gender: DataTypes.STRING,
+        description: DataTypes.TEXT,
+        roleId: DataTypes.INTEGER,
+        isActive: DataTypes.TINYINT(1),
+        createdAt: DataTypes.DATE,
+        updatedAt: DataTypes.DATE,
+        deletedAt: DataTypes.DATE,
+    }, {});
+    User.associate = function(models) {
+        models.User.belongsTo(models.Role, { foreignKey: 'roleId' });
+        models.User.hasOne(models.Post);
+        models.User.hasOne(models.Doctor_User, { foreignKey: 'doctorId' });
+        models.User.hasMany(models.Patient, { foreignKey: 'doctorId' });
+        models.User.hasMany(models.Schedule, { foreignKey: 'doctorId' });
+        models.User.hasMany(models.Comment, { foreignKey: 'doctorId' });
+    };
+
     return User;
 };
